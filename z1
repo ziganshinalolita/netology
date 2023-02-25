@@ -16,14 +16,21 @@ class Student:
         else:
             return 'Ошибка'
 
-    def avrg_hw(self, course, grade):
-        if isinstance(student, Student) and course in self.finished_courses:
-            # дальше ступор
+    def avrg_rating(student_list, course):
+        mylist = []
+        for x in student_list:
+            for key, value in x.grades.items():
+                if course == key:
+                    rating = sum(value) / len(value)
+                    mylist += rating
+         rating_all = sum(mylist) / len(mylist)
+         return rating_all
+            
         
         
 
     def __str__(self):
-        rez = f'Имя: {self.name}\nФамилия: {self.surname}\nСредняя оценка за домашние задания: {self.grades}\nКурсы в процессе изучения:{self.courses_in_progress}\nЗавершенные курсы:{self.finished_courses}'
+        rez = f'Имя: {self.name}\nФамилия: {self.surname}\nСредняя оценка за домашние задания: {rating_all}\nКурсы в процессе изучения:{self.courses_in_progress}\nЗавершенные курсы:{self.finished_courses}'
         return rez 
 
 class Mentor:
@@ -34,13 +41,23 @@ class Mentor:
 
 
 class Lecturer(Mentor):
-    def __init__(self, name, surname):
+    def __init__(self, name, surname, course):
         super().__init__(name, surname)
         self.grade = {}
+        
+    def avrg_rating(lecturer_list, course):
+        mylist = []
+        for x in lecturer_list:
+            for key, value in x.grades.items():
+                if course == key:
+                    rating = sum(value) / len(value)
+                    mylist += rating
+         rating_all = sum(mylist) / len(mylist)
+         return rating_all
 
 
     def __str__(self):
-        rez = f'Имя: {self.name}\nФамилия: {self.surmane}\nСредняя оценка за лекции: {self.grade}'
+        rez = f'Имя: {self.name}\nФамилия: {self.surmane}\nСредняя оценка за лекции: {rating_all}'
         return rez
 
 class Reviewer(Mentor):
@@ -57,19 +74,25 @@ class Reviewer(Mentor):
         rez = f'Имя: {self.name}\nФамилия: {self.surname}'
         return rez
     
-student1 = Student('Иван', 'Иванов','м')
+student1 = Student('Иван', 'Иванов', 'м')
 student1.finished_courses += ['Введение в програмирование']
+student1.finished_courses += ['Основы Python']
 student1.courses_in_progress += ['Python']
 student1.courses_in_progress += ['Java']
-
+student1.avrg_rating(student1.grades, student1.finished_courses)
 
 student2 = Student('Петр', 'Сидоров','м')
 student2.finished_courses += ['Введение в програмирование']
+student2.finished_courses += ['Основы Python']
 student2.courses_in_progress += ['Python']
 student2.courses_in_progress += ['Java']
+student2.avrg_rating(student2.grades, student2.finished_courses)
 
-student1.grade_to_lecturer()
-student2.grade_to_lecturer()
+
+student1.grade_to_lecturer(lecturer1, 'Введение в програмирование')
+student1.grade_to_lecturer(lecturer2, 'Основы Python')
+student2.grade_to_lecturer(lecturer1, 'Введение в програмирование')
+student2.grade_to_lecturer(lecturer2, 'Основы Python')
  
 reviewer1 = Reviewer('Дмитрий', 'Назаров')
 reviewer1.courses_attached += ['Python']
@@ -82,7 +105,8 @@ reviewer1.rate_hw(student2, 'Python', 10)
 reviewer2.rate_hw(student1, 'Java', 8.8)
 reviewer2.rate_hw(student2, 'Java', 7.7)
 
-lecturer1 = Lecturer('Алексей', 'Васечкин')
-lecturer1 = Lecturer('Олег', 'Нечаев')
+lecturer1 = Lecturer('Алексей', 'Васечкин','Введение в програмирование' )
+lecturer2 = Lecturer('Олег', 'Нечаев', 'Основы Python')
+lecturer1.avrg_rating(lecturer1.grades, lecturer1.course)
+lecturer2.avrg_rating(lecturer2.grades, lecturer2.course)
 
-Lecturer()
