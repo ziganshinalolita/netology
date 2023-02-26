@@ -1,0 +1,23 @@
+with open ('1.txt', 'rt', encoding ='utf-8') as f:
+    dishes = {}
+    for line in f:
+        dishes_name = f.readline().strip()
+        count =  int(f.readline())
+        ingredient = []
+        for i in range(count):
+            emp = f.readline().strip()
+            product, quantity, value = emp.split(' | ')
+            ingridient.append({
+                'product': product
+                'quantity': quantity
+                'measure': measure
+            })
+        f.readline
+        dishes[dishes_name] = ingredient
+
+def get_shop_list_by_dishes(dishes, person_count):
+    shoping_list ={}
+    for dish in dishes.items():
+        for key, values in dish:
+            products = {'measure': measure, 'quantity': person_count * quantity}
+        shoping_list[ingredient] = products
